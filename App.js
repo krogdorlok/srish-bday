@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Text, View } from "react-native";
 import GiftBox from "./components/GiftBox";
 import Quiz from "./components/Quiz";
+import BirthdayCake from "./components/BirthdayCake";
 
 const gifts = [
   { id: 1, type: "media" },
@@ -74,7 +75,10 @@ export default function App() {
           onComplete={handleQuizComplete}
         />
       )}
-      {revealed && (
+      {!revealed && currentGift.type === "cake" && (
+        <BirthdayCake onCandlesOut={() => alert("Happy Birthday!")} />
+      )}
+      {revealed && currentGift.type !== "cake" && (
         <View className="items-center">
           <Text className="text-2xl text-gray-700 mb-8">
             Gift content for box #{currentGift.id} would be here!
