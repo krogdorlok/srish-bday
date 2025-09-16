@@ -46,6 +46,16 @@ export default function App() {
     setRevealed(true);
   };
 
+  const handleNextGift = () => {
+    if (currentGiftIndex < gifts.length - 1) {
+      setCurrentGiftIndex(currentGiftIndex + 1);
+      setRevealed(false);
+    } else {
+      // Handle end of gifts
+      alert("You've opened all the gifts!");
+    }
+  };
+
   const currentGift = gifts[currentGiftIndex];
 
   return (
@@ -65,9 +75,17 @@ export default function App() {
         />
       )}
       {revealed && (
-        <Text className="text-2xl text-gray-700">
-          Gift content for box #{currentGift.id} would be here!
-        </Text>
+        <View className="items-center">
+          <Text className="text-2xl text-gray-700 mb-8">
+            Gift content for box #{currentGift.id} would be here!
+          </Text>
+          <Pressable
+            onPress={handleNextGift}
+            className="bg-yellow-500 px-6 py-3 rounded-lg"
+          >
+            <Text className="text-white font-bold text-lg">Next Gift</Text>
+          </Pressable>
+        </View>
       )}
       <StatusBar style="auto" />
     </View>
